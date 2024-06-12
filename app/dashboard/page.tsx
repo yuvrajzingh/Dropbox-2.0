@@ -1,12 +1,5 @@
-import { SignedIn } from '@clerk/nextjs'
-import React from 'react'
-
 function Dashboard() {
-  return (
-    <SignedIn>
-        <div>Dashboard</div>
-    </SignedIn>
-  )
+  return <div>Dashboard</div>;
 }
 
-export default Dashboard
+export default Dashboard;
