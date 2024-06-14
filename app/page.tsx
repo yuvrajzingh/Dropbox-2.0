@@ -1,4 +1,4 @@
-import { HOME_VID } from "@/lib/constants";
+import { HOME_VID } from "@/constants";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
