@@ -14,9 +14,12 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
+import { useToast } from "@/components/ui/use-toast"
+
 
 function RenameModal() {
 
+    const { toast } = useToast()
     const {user} = useUser();
     const [input, setInput] = useState("");
 
@@ -36,6 +39,10 @@ function RenameModal() {
 
         setInput("");
         setIsRenameModalOpen(false);
+
+        toast({
+            description: "✅ File Renamed Successfully!",
+        })
     }
 
   return (

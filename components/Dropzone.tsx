@@ -13,10 +13,12 @@ import {
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useEffect, useState } from "react";
 import DropzoneComponent from "react-dropzone";
+import { useToast } from "@/components/ui/use-toast"
 
 function Dropzone() {
   const [loading, setLoading] = useState(false);
   const { isLoaded, isSignedIn, user } = useUser();
+  const { toast } = useToast()
    
   // Ensure the component waits until user information is loaded
    useEffect(() => {
@@ -32,7 +34,6 @@ function Dropzone() {
   const onDrop = (acceptedFiles: File[]) => {
     acceptedFiles.forEach((file) => {
       const reader = new FileReader();
-
       reader.onabort = () => console.log("file reading was aborted.");
       reader.onerror = () => console.log("file reading has failed.");
       reader.onload = async () => {
@@ -46,6 +47,9 @@ function Dropzone() {
     if (!user) return;
 
     setLoading(true);
+    toast({
+      description: "Loading...",
+    })
 
     try {
       // To store in the database
@@ -67,8 +71,13 @@ function Dropzone() {
       await updateDoc(doc(db, "users", user.id, "files", docRef.id), {
         downloadURL: downloadURL,
       });
+      toast({
+        description: "✅ File Uploaded Successfully!",
+      })
     } catch (error) {
-      console.error("Error uploading file:", error);
+      toast({
+        description: "❌ Error Uploading file",
+      })
     } finally {
       setLoading(false);
     }
