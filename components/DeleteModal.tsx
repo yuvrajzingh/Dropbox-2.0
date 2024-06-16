@@ -1,16 +1,15 @@
 'use client';
 
 import { Button } from "@/components/ui/button"
+
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog"
+
 import { db, storage } from "@/firebase";
 import { useAppStore } from "@/store/store";
 import { useUser } from "@clerk/nextjs";
@@ -77,6 +76,7 @@ export function DeleteModal() {
             <Button
                 type="submit"
                 size="sm"
+                variant={"destructive"}
                 className="px-3 flex-1"
                 onClick={()=>deleteFile()}
             >  
